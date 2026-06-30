@@ -10,8 +10,7 @@ def converttostring(current):
 def hangman(current):
     attempts = 0
     while attempts < 18:
-        letter = input("What letter would you like to guess? ")
-        letter = letter.lower()
+        letter = input("What letter would you like to guess? ").lower()
         validletters = 'abcdefghijklmnopqrstuvwxyz'
 
         if letter not in validletters:
@@ -56,7 +55,7 @@ def wordpicker():
     if len(wordsplayed) > 0:
         print("You have played numbers: " + str(wordsplayed))
     playerword = int(input("Pick a number between 1 and 20: "))
-    if playerword in wordsplayed:
+    if playerword in wordsplayed or playerword == '':
         print("You already guessed that word!")
         playerword = int(input("Pick a number between 1 and 20: "))
     targetword = ''
