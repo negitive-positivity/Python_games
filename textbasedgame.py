@@ -1,9 +1,6 @@
-
 import random
 
-
 name = input("What is your name? ")
-
 
 #choosing class + invalid protection
 print("Classes: Druid, Fighter, Warlock, Mage, Rouge")
@@ -14,7 +11,7 @@ if characterclass == "druid" or characterclass == "Druid" or characterclass == "
     valid = True
 
 while valid == False:
-    print("Invalid class detected! Try again")
+    print("Invalid class detected! Try again.")
     characterclass = input("What class do you choose? ")
     if characterclass == "druid" or characterclass == "Druid" or characterclass == "fighter" or characterclass == "Fighter" or characterclass == "warlock" or characterclass == "Warlock" or characterclass == "mage" or characterclass == "Mage" or characterclass == "rouge" or characterclass == "Rouge":
         valid = True
@@ -35,13 +32,13 @@ elif characterclass == "fighter" or characterclass == "Fighter":
     health = 80
     attack = 35
     defense = 3
-    print(name + ", You have chosen Mage! ")
+    print(name + ", You have chosen Fighter! ")
 
 elif characterclass == "Mage" or characterclass == "mage":
     health = 95
     attack = 37
     defense = 0
-    print(name + ", You have chosen Fighter! ")
+    print(name + ", You have chosen Mage! ")
 
 elif characterclass == "warlock" or characterclass == "Warlock":
     health = 90
@@ -91,13 +88,11 @@ for counter in range(2):
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
 
             
         elif inputt == "defend" or inputt == "Defend":
@@ -109,13 +104,11 @@ for counter in range(2):
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             eattack += 5
 
             
@@ -131,13 +124,11 @@ for counter in range(2):
                 if edecidion == 1:
                     print("Enemy attacks!")
                     health = health - eattack + defense
-                    print(name + " has " + str(health) + " health left!")
-                    print("                                            ")
+                    print(name + " has " + str(health) + " health left!", end="\n\n")
                 else:
                     print("Enemy heals!")
                     ehealth += edefense
-                    print("Enemy has " + str(ehealth) + " health left!")
-                    print("                                            ")
+                    print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             else:
                 print(name + " has run out of heals!")
             
@@ -163,7 +154,7 @@ for counter in range(2):
             break
 
     #second battle
-    print("                                            ")
+    print()
     print (name + " encounters an enemy...")
     ehealth = random.randint(50, 100)
     eattack = random.randint(10, 15)
@@ -184,34 +175,29 @@ for counter in range(2):
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
                 
                 
             
         elif inputt == "defend" or inputt == "Defend":
             print(name + " defends!")
             eattack -= 5
-            print("Enemy has " + str(ehealth) + " health left!")
+            print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             
             #enemy decidion
             edecidion = random.randint(1,2)
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
-
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             
         elif inputt == "heal" or inputt == "Heal":
             if timeshealed < 4:
@@ -225,13 +211,11 @@ for counter in range(2):
                 if edecidion == 1:
                     print("Enemy attacks!")
                     health = health - eattack + defense
-                    print(name + " has " + str(health) + " health left!")
-                    print("                                            ")
+                    print(name + " has " + str(health) + " health left!", end="\n\n")
                 else:
                     print("Enemy heals!")
                     ehealth += edefense
-                    print("Enemy has " + str(ehealth) + " health left!")
-                    print("                                            ")
+                    print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             else:
                 print(name + " has run out of heals!")
             
@@ -257,7 +241,7 @@ for counter in range(2):
             break
 
     #third battle
-    print("                                            ")
+    print()
     print (name + " encounters an enemy...")
     ehealth = random.randint(50, 100)
     eattack = random.randint(10, 15)
@@ -276,13 +260,11 @@ for counter in range(2):
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
 
             
         elif inputt == "defend" or inputt == "Defend":
@@ -294,13 +276,11 @@ for counter in range(2):
             if edecidion == 1:
                 print("Enemy attacks!")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print("Enemy heals!")
                 ehealth += edefense
-                print("Enemy has " + str(ehealth) + " health left!")
-                print("                                            ")
+                print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             eattack += 5
 
 
@@ -316,13 +296,11 @@ for counter in range(2):
                 if edecidion == 1:
                     print("Enemy attacks!")
                     health = health - eattack + defense
-                    print(name + " has " + str(health) + " health left!")
-                    print("                                            ")
+                    print(name + " has " + str(health) + " health left!", end="\n\n")
                 else:
                     print("Enemy heals!")
                     ehealth += edefense
-                    print("Enemy has " + str(ehealth) + " health left!")
-                    print("                                            ")
+                    print("Enemy has " + str(ehealth) + " health left!", end="\n\n")
             else:
                 print(name + " has run out of heals!")
 
@@ -347,7 +325,7 @@ for counter in range(2):
             break
 
     #final boss
-    print("                                            ")
+    print()
     print (name + " encounters an enemy...They seem extra strong! And what is that music...?")
     healbefore = input("Would you like to heal before starting the battle? ")
     if healbefore == "yes" or healbefore == "Yes" or healbefore == "heal" or healbefore == "Heal":
@@ -361,7 +339,7 @@ for counter in range(2):
     else:
         print("You are going to have a bad time...")
         
-    print("                                            ")    
+    print()    
     print("SANS (final boss) arrives! (I thought this was DND? Where did he-) *cue MEGALOVANIA in the background*")
 
     while level < 2:
@@ -383,17 +361,15 @@ for counter in range(2):
             print("Sans has " + str(ehealth) + " health left!")
             print("Sans attacks with a gaster blaster!")
             health = health - eattack + defense
-            print(name + " has " + str(health) + " health left!")
-            print("                                            ")
-            
+            print(name + " has " + str(health) + " health left!", end="\n\n")
+
         elif inputt == "defend" or inputt == "Defend":
             print(name + " defends!")
             eattack -= 5
-            print("Sans has " + str(ehealth) + " health left!")
+            print("Sans has " + str(ehealth) + " health left!", end="\n\n")
             print("Sans attacks! His eye turns a fiery blue...")
             health = health - eattack + defense
-            print(name + " has " + str(health) + " health left!")
-            print("                                            ")
+            print(name + " has " + str(health) + " health left!", end="\n\n")
             eattack += 5
 
         elif inputt == "heal" or inputt == "Heal":
@@ -405,8 +381,7 @@ for counter in range(2):
                 print("Sans has " + str(ehealth) + " health left!")
                 print("MEGALOVANIA plays louder! Sans chuckles and throws a bone at you")
                 health = health - eattack + defense
-                print(name + " has " + str(health) + " health left!")
-                print("                                            ")
+                print(name + " has " + str(health) + " health left!", end="\n\n")
             else:
                 print(name + " has run out of heals!")
 
@@ -438,7 +413,7 @@ if health > 0:
     print("You won!")
     print("You dealt " + str(attackstat) + " damage overall!" )
     if average / 4 == 1:
-        print("You dealt an average of " + str(attackstat/3) + " each battle!")
+        print("You dealt an average of " + str(attackstat/3) + " each battle!", end="\n\n")
 
 if health < 0:
     print("The enemy defeated you...")
@@ -451,6 +426,3 @@ if health < 0:
         print("You dealt an average of " + str(attackstat/2) + " each battle!")
     if average / 1 == 1:
         print("You dealt an average of " + str(attackstat/1) + " each battle!")
-
-
-
