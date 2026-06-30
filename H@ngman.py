@@ -28,16 +28,14 @@ def hangman(current):
                     if letter == targetword[i]:
                         current[i] = letter
                 print(converttostring(current))
-                print("Letters guessed: " + str(lettersguessed))
-                print('                             ')
+                print("Letters guessed: " + str(lettersguessed), end="\n\n")
         
             elif letter not in targetword and attempts < 18:
                 attempts += 1
                 print("Your letter is not in the word! " + str(18 - attempts) + " attempts remaining")
                 lettersguessed.append(letter)
                 print(converttostring(current))
-                print("Letters guessed: " + str(lettersguessed))
-                print('                             ')
+                print("Letters guessed: " + str(lettersguessed), end="\n\n")
                 
         if attempts > 0 and '_' not in current:
             print("You guessed the word!")
