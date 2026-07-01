@@ -1,17 +1,17 @@
+import random
+
 print("Welcome to H@ngman! You have 18 attempts to guess the word. Good luck!")
+
 def converttostring(current):
-    returnedstring = ''
+    return ' '.join(current)
 
-    for i in range(len(current)):
-        returnedstring += current[i] + ' '
-
-    return returnedstring
 
 def remainingletters(guessed):
     validletters = 'abcdefghijklmnopqrstuvwxyz'
     return ' '.join(letter for letter in validletters if letter not in guessed)
 
-def hangman(current):
+
+def hangman(current, targetword, lettersguessed):
     wrong = 0
     totalguesses = 0
     while wrong < 18:
@@ -54,20 +54,76 @@ def hangman(current):
 
     return totalguesses
 
+
 wordsplayed = []
+
+WORDS = {
+    1: ('antidisestablishmentarianism',
+        "the opposition to the disestablishment of the Church of England"),
+    2: ('deltarune',
+        "an episodic role-playing video game developed by Toby Fox as a follow-up to his 2015 video game Undertale. In the game, the player controls a human teenager, Kris, who is destined to save the world together with Susie, a monster, and Ralsei, a prince from the Dark World."),
+    3: ('undertale',
+        "a 2015 2D role-playing video game created by American indie developer Toby Fox. The player controls a child who has fallen into the Underground: a large, secluded region under the surface of the Earth, separated by a magical barrier."),
+    4: ('pneumonoultramicroscopicsilicovolcanoconiosis',
+        "an invented long word said to mean a lung disease caused by inhaling very fine ash and sand dust from a volcano/volcanic area."),
+    5: ('zebra',
+        "an African wild horse with black-and-white stripes and an stand up mane."),
+    6: ('hippopotomonstrosesquippedaliophobia',
+        "the fear of long words. It's also known as sesquipedalophobia, which is a Latin term that means long word"),
+    7: ('ghostwriter',
+        "a person whose job it is to write material for someone else who is the named author."),
+    8: ('atmosphere',
+        "the envelope of gases surrounding the earth or another planet."),
+    9: ('integrated',
+        "with various parts or aspects linked or coordinated."),
+    10: ('disturbance',
+         "the interruption of a settled and peaceful condition."),
+    11: ('supplementary',
+         "completing or enhancing something."),
+    12: ('allowance',
+         "the amount of something that is permitted, especially within a set of regulations or for a specified purpose"),
+    13: ('echocardiagram',
+         "a test of the action of the heart using ultrasound waves to produce a visual display, used for the diagnosis or monitoring of heart disease."),
+    14: ('excavation',
+         "the action of excavating something, especially an archaeological site."),
+    15: ('progressive',
+         "happening or developing gradually or in stages; proceeding step by step. or, a person advocating or implementing social reform or new, liberal ideas."),
+    16: ('negligence',
+         "failure to take proper care in doing something."),
+    17: ('mechanical',
+         "working or produced by machines or machinery. or, (of a person or action) not having or showing thought or spontaneity; automatic."),
+    18: ('simplicity',
+         "the quality or condition of being easy to understand or do. or, the quality or condition of being plain or natural."),
+    19: ('identification',
+         "the action or process of identifying someone or something or the fact of being identified. or, a means of proving a person's identity, especially in the form of official papers."),
+    20: ('randomization',
+         "the arrangement of a set of items, people, etc. in an unpredictable, unsystematic, or random order."),
+}
+
 
 def wordpicker():
     if len(wordsplayed) > 0:
         print("You have played numbers: " + str(wordsplayed))
 
     while True:
+        raw = input("Pick a number between 1 and 20 (or type 'r' for a random word): ").strip().lower()
+
+        if raw in ('r', 'random'):
+            available = [n for n in WORDS if n not in wordsplayed]
+            if not available:
+                print("You've played every word! Starting the list over.")
+                wordsplayed.clear()
+                available = list(WORDS)
+            playerword = random.choice(available)
+            break
+
         try:
-            playerword = int(input("Pick a number between 1 and 20: "))
+            playerword = int(raw)
         except ValueError:
             print("Please enter a number, not text.")
             continue
 
-        if playerword < 1 or playerword > 20:
+        if playerword not in WORDS:
             print("Not a valid answer")
             continue
 
@@ -77,69 +133,7 @@ def wordpicker():
 
         break
 
-    targetword = ''
-    endmessage = ''
-    if playerword == 1:
-        targetword = 'antidisestablishmentarianism'
-        endmessage = "the opposition to the disestablishment of the Church of England"
-    elif playerword == 2:
-        targetword = 'deltarune'
-        endmessage = "an episodic role-playing video game developed by Toby Fox as a follow-up to his 2015 video game Undertale. In the game, the player controls a human teenager, Kris, who is destined to save the world together with Susie, a monster, and Ralsei, a prince from the Dark World."
-    elif playerword == 3:
-        targetword = 'undertale'
-        endmessage = "a 2015 2D role-playing video game created by American indie developer Toby Fox. The player controls a child who has fallen into the Underground: a large, secluded region under the surface of the Earth, separated by a magical barrier."
-    elif playerword == 4:
-        targetword = 'pneumonoultramicroscopicsilicovolcanoconiosis'
-        endmessage = "an invented long word said to mean a lung disease caused by inhaling very fine ash and sand dust from a volcano/volcanic area."
-    elif playerword == 5:
-        targetword = 'zebra'
-        endmessage = "an African wild horse with black-and-white stripes and an stand up mane."
-    elif playerword == 6:
-        targetword = 'hippopotomonstrosesquippedaliophobia'
-        endmessage = "the fear of long words. It's also known as sesquipedalophobia, which is a Latin term that means long word"
-    elif playerword == 7:
-        targetword = 'ghostwriter'
-        endmessage = "a person whose job it is to write material for someone else who is the named author."
-    elif playerword == 8:
-        targetword = 'atmosphere'
-        endmessage = "the envelope of gases surrounding the earth or another planet."
-    elif playerword == 9:
-        targetword = 'integrated'
-        endmessage = "with various parts or aspects linked or coordinated."
-    elif playerword == 10:
-        targetword = 'disturbance'
-        endmessage = "the interruption of a settled and peaceful condition."
-    elif playerword == 11:
-        targetword = 'supplementary'
-        endmessage = "completing or enhancing something."
-    elif playerword == 12:
-        targetword = 'allowance'
-        endmessage = "the amount of something that is permitted, especially within a set of regulations or for a specified purpose"
-    elif playerword == 13:
-        targetword = 'echocardiagram'
-        endmessage = "a test of the action of the heart using ultrasound waves to produce a visual display, used for the diagnosis or monitoring of heart disease."
-    elif playerword == 14:
-        targetword = 'excavation'
-        endmessage = "the action of excavating something, especially an archaeological site."
-    elif playerword == 15:
-        targetword = 'progressive'
-        endmessage = "happening or developing gradually or in stages; proceeding step by step. or, a person advocating or implementing social reform or new, liberal ideas."
-    elif playerword == 16:
-        targetword = 'negligence'
-        endmessage = "failure to take proper care in doing something."
-    elif playerword == 17:
-        targetword = 'mechanical'
-        endmessage = "working or produced by machines or machinery. or, (of a person or action) not having or showing thought or spontaneity; automatic."
-    elif playerword == 18:
-        targetword = 'simplicity'
-        endmessage = "the quality or condition of being easy to understand or do. or, the quality or condition of being plain or natural."
-    elif playerword == 19:
-        targetword = 'identification'
-        endmessage = "the action or process of identifying someone or something or the fact of being identified. or, a means of proving a person's identity, especially in the form of official papers."
-    elif playerword == 20:
-        targetword = 'randomization'
-        endmessage = "the arrangement of a set of items, people, etc. in an unpredictable, unsystematic, or random order."
-
+    targetword, endmessage = WORDS[playerword]
     return targetword, endmessage, playerword
 
 
@@ -152,22 +146,19 @@ lettersguessed = []
 averageguesses = []
 print(current)
 
-attempts = hangman(current)
+attempts = hangman(current, targetword, lettersguessed)
 games = 1
 
 
 while True:
     print(targetword + ": " + endmessage)
-    play = input("Would you like to play again? ")
+
+    play = input("Would you like to play again? ").strip().lower()
+
     averageguesses.append(attempts)
-    average = 0
-    items = len(averageguesses)
+    average = sum(averageguesses) / len(averageguesses)
 
-    for i in range(items):
-        average += averageguesses[i]
-    average /= items
-
-    if play == 'yes' or play == 'Yes':
+    if play in ('yes', 'y'):
         games += 1
         wordsplayed.append(playerword)
         lettersguessed = []
@@ -175,11 +166,11 @@ while True:
         targetword, endmessage, playerword = wordpicker()
         for i in range(len(targetword)):
             current.append("_")
-        attempts = hangman(current) 
+        attempts = hangman(current, targetword, lettersguessed)  # FIX #4: capture the return value on replays too
         print("You have played " + str(games) + " games so far!")
         print("Your average guesses: " + str(average))
 
-    elif play == 'no' or play == 'No' or play == 'nah':
+    elif play in ('no', 'nah', 'n'):
         print("aww okay :(")
         print("You played " + str(games) + " games in total!")
         print("Your average guesses were: " + str(average))
