@@ -1,6 +1,6 @@
 import random
 
-print("Welcome to H@ngman! You have 18 attempts to guess the word. Good luck!")
+print("Welcome to H@ngman! You have 10 (wrong) attempts to guess the word. Good luck!")
 
 def converttostring(current):
     return ' '.join(current)
@@ -14,7 +14,7 @@ def remainingletters(guessed):
 def hangman(current, targetword, lettersguessed):
     wrong = 0
     totalguesses = 0
-    while wrong < 18:
+    while wrong < 10:
         letter = input("What letter would you like to guess? ").lower()
         validletters = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -29,7 +29,7 @@ def hangman(current, targetword, lettersguessed):
         totalguesses += 1
 
         if letter in targetword:
-            print("Your letter is in the word! " + str(18 - wrong) + " wrong guesses allowed remaining")
+            print("Your letter is in the word! " + str(10 - wrong) + " wrong guesses allowed remaining")
             lettersguessed.append(letter)
             for i in range(len(targetword)):
                 if letter == targetword[i]:
@@ -39,7 +39,7 @@ def hangman(current, targetword, lettersguessed):
 
         else:
             wrong += 1
-            print("Your letter is not in the word! " + str(18 - wrong) + " wrong guesses remaining")
+            print("Your letter is not in the word! " + str(10 - wrong) + " wrong guesses remaining")
             lettersguessed.append(letter)
             print(converttostring(current))
             print("Letters left to try: " + remainingletters(lettersguessed), end="\n\n")
@@ -48,7 +48,7 @@ def hangman(current, targetword, lettersguessed):
             print("You guessed the word!")
             break
 
-        if wrong >= 18:
+        if wrong >= 10:
             print("You ran out of tries! try again next time :(")
             break
 
