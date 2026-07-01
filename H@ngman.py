@@ -1,9 +1,85 @@
 import random
 
-print("Welcome to H@ngman! You have 10 (wrong) attempts to guess the word. Good luck!")
+# Single source of truth for difficulty, so changing difficulty is a one-line edit
+# here rather than hunting down every place 18 appeared in the file.
+MAX_WRONG_GUESSES = 10
+
+print(f"Welcome to H@ngman! You have {MAX_WRONG_GUESSES} wrong guesses before you lose. Good luck!")
+
 
 def converttostring(current):
     return ' '.join(current)
+
+
+# A simple ASCII visual for the hangman itself. There are 7
+# stages (0 = empty gallows, 6 = fully drawn figure). The formula below
+# scales the current wrong-guess count against MAX_WRONG_GUESSES rather
+# than assuming a specific limit, so it stays correct no matter what the
+# difficulty is set to.
+HANGMAN_STAGES = [
+    r"""
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========""",
+    r"""
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========""",
+]
+
+
+def hangmanart(wrong):
+    laststage = len(HANGMAN_STAGES) - 1
+    stage = min(wrong, MAX_WRONG_GUESSES) * laststage // MAX_WRONG_GUESSES
+    return HANGMAN_STAGES[stage]
 
 
 def remainingletters(guessed):
@@ -14,7 +90,7 @@ def remainingletters(guessed):
 def hangman(current, targetword, lettersguessed):
     wrong = 0
     totalguesses = 0
-    while wrong < 10:
+    while wrong < MAX_WRONG_GUESSES:
         letter = input("What letter would you like to guess? ").lower()
         validletters = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -29,7 +105,8 @@ def hangman(current, targetword, lettersguessed):
         totalguesses += 1
 
         if letter in targetword:
-            print("Your letter is in the word! " + str(10 - wrong) + " wrong guesses allowed remaining")
+            print(hangmanart(wrong))
+            print("Your letter is in the word! " + str(MAX_WRONG_GUESSES - wrong) + " wrong guesses allowed remaining")
             lettersguessed.append(letter)
             for i in range(len(targetword)):
                 if letter == targetword[i]:
@@ -39,7 +116,8 @@ def hangman(current, targetword, lettersguessed):
 
         else:
             wrong += 1
-            print("Your letter is not in the word! " + str(10 - wrong) + " wrong guesses remaining")
+            print(hangmanart(wrong))
+            print("Your letter is not in the word! " + str(MAX_WRONG_GUESSES - wrong) + " wrong guesses remaining")
             lettersguessed.append(letter)
             print(converttostring(current))
             print("Letters left to try: " + remainingletters(lettersguessed), end="\n\n")
@@ -48,7 +126,7 @@ def hangman(current, targetword, lettersguessed):
             print("You guessed the word!")
             break
 
-        if wrong >= 10:
+        if wrong >= MAX_WRONG_GUESSES:
             print("You ran out of tries! try again next time :(")
             break
 
@@ -152,9 +230,7 @@ games = 1
 
 while True:
     print(targetword + ": " + endmessage)
-
     play = input("Would you like to play again? ").strip().lower()
-
     averageguesses.append(attempts)
     average = sum(averageguesses) / len(averageguesses)
 
@@ -166,7 +242,7 @@ while True:
         targetword, endmessage, playerword = wordpicker()
         for i in range(len(targetword)):
             current.append("_")
-        attempts = hangman(current, targetword, lettersguessed)  # FIX #4: capture the return value on replays too
+        attempts = hangman(current, targetword, lettersguessed)
         print("You have played " + str(games) + " games so far!")
         print("Your average guesses: " + str(average))
 
