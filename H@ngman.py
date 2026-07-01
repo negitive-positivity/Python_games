@@ -1,8 +1,11 @@
 import random
 
 # Single source of truth for difficulty, so changing difficulty is a one-line edit
-# here rather than hunting down every place 18 appeared in the file.
 MAX_WRONG_GUESSES = 10
+
+# Single source of truth for valid letter input, instead of the same
+# string being redefined separately inside hangman() and remainingletters()
+VALID_LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 
 print(f"Welcome to H@ngman! You have {MAX_WRONG_GUESSES} wrong guesses before you lose. Good luck!")
 
@@ -11,11 +14,6 @@ def converttostring(current):
     return ' '.join(current)
 
 
-# A simple ASCII visual for the hangman itself. There are 7
-# stages (0 = empty gallows, 6 = fully drawn figure). The formula below
-# scales the current wrong-guess count against MAX_WRONG_GUESSES rather
-# than assuming a specific limit, so it stays correct no matter what the
-# difficulty is set to.
 HANGMAN_STAGES = [
     r"""
   +---+
@@ -83,8 +81,7 @@ def hangmanart(wrong):
 
 
 def remainingletters(guessed):
-    validletters = 'abcdefghijklmnopqrstuvwxyz'
-    return ' '.join(letter for letter in validletters if letter not in guessed)
+    return ' '.join(letter for letter in VALID_LETTERS if letter not in guessed)
 
 
 def hangman(current, targetword, lettersguessed):
@@ -92,9 +89,8 @@ def hangman(current, targetword, lettersguessed):
     totalguesses = 0
     while wrong < MAX_WRONG_GUESSES:
         letter = input("What letter would you like to guess? ").lower()
-        validletters = 'abcdefghijklmnopqrstuvwxyz'
 
-        if len(letter) != 1 or letter not in validletters:
+        if len(letter) != 1 or letter not in VALID_LETTERS:
             print("Not a letter!! Try again >:(")
             continue
 
@@ -134,6 +130,7 @@ def hangman(current, targetword, lettersguessed):
 
 
 wordsplayed = []
+
 
 WORDS = {
     1: ('antidisestablishmentarianism',
@@ -222,7 +219,7 @@ for i in range(len(targetword)):
 
 lettersguessed = []
 averageguesses = []
-print(current)
+print(converttostring(current))
 
 attempts = hangman(current, targetword, lettersguessed)
 games = 1
